@@ -77,4 +77,4 @@ curl -X POST http://localhost:3000/mcp \
 
 ## Environment Variables
 
-- `FRIDAY_API_KEY`: Your LinkedIn API key for authentication 
+- `FRIDAY_API_KEY`: Your API Key for authentication 
