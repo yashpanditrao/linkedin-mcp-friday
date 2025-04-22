@@ -1,0 +1,39 @@
+{
+  "name": "linkedin-mcp-friday",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "MCP server for LinkedIn profile and company data scraping",
+  "main": "dist/server.js",
+  "scripts": {
+    "start": "ts-node src/server.ts",
+    "build": "tsc",
+    "dev": "ts-node-dev --respawn src/server.ts",
+    "test": "jest"
+  },
+  "keywords": [
+    "mcp",
+    "linkedin",
+    "scraping",
+    "api"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "@types/node": "^18.0.0",
+    "dotenv": "^16.0.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^4.9.0",
+    "zod": "^3.0.0"
+  },
+  "devDependencies": {
+    "ts-node-dev": "^2.0.0"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    }
+  }
+}
