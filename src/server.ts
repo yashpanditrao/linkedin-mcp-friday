@@ -42,7 +42,7 @@ server.tool(
       const timeout = setTimeout(() => controller.abort(), 60000); // Increased to 60 second timeout
 
       const response = await fetch(
-        `https://friday-data-production.up.railway.app/profile?profile_url=${encodeURIComponent(profile_url)}`,
+        `https://api.fridaydata.tech/profile?profile_url=${encodeURIComponent(profile_url)}`,
         {
           headers: {
             'X-API-KEY': process.env.FRIDAY_API_KEY || '',
@@ -106,7 +106,7 @@ server.tool(
       const timeout = setTimeout(() => controller.abort(), 60000); // Increased to 60 second timeout
 
       const response = await fetch(
-        'https://friday-data-production.up.railway.app/analyze-company',
+        'https://api.fridaydata.tech/analyze-company',
         {
           method: 'POST',
           headers: {
