@@ -5,9 +5,9 @@
   "description": "MCP server for LinkedIn profile and company data scraping",
   "main": "dist/server.js",
   "scripts": {
-    "start": "ts-node src/server.ts",
+    "start": "node --loader ts-node/esm src/server.ts",
     "build": "tsc",
-    "dev": "ts-node-dev --respawn src/server.ts",
+    "dev": "node --loader ts-node/esm src/server.ts",
     "test": "jest"
   },
   "keywords": [
