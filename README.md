@@ -32,20 +32,25 @@ This MCP server provides a reliable way to scrape and analyze LinkedIn data thro
 1. Get your API key from [Friday Data](https://fridaydata.tech)
 
 ## Setup
-Add this to your MCP client configuration
-"friday_data_mcp": {
-      "name": "Friday Data MCP", 
-      "command": "npx",
-      "args": [
-        "fridaydata-mcp"
-      ],
-      "env": {
-        "FRIDAY_API_KEY": "YOUR_API_KEY"
-      },
-      "capabilities": {
-        "tools": true,
-        "resources": false,
-        "prompts": false,
-        "sampling": false
-      }
+
+Add this to your MCP client configuration:
+
+```json
+{
+  "friday_data_mcp": {
+    "name": "Friday Data MCP",
+    "command": "npx",
+    "args": [
+      "fridaydata-mcp"
+    ],
+    "env": {
+      "FRIDAY_API_KEY": "YOUR_API_KEY"
+    },
+    "capabilities": {
+      "tools": true,
+      "resources": false,
+      "prompts": false,
+      "sampling": false
     }
+  }
+}```
