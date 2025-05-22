@@ -53,4 +53,4 @@ Add this to your MCP client configuration:
       "sampling": false
     }
   }
-}```
+}
