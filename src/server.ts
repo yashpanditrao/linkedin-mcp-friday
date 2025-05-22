@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
@@ -15,8 +17,8 @@ if (!process.env.FRIDAY_API_KEY) {
 }
 
 const server = new McpServer({
-  name: "LinkedIn Scraper",
-  version: "1.0.0",
+  name: "Friday Data MCP",
+  version: "1.0.1",
   capabilities: {
     tools: true,
     resources: false,
@@ -24,8 +26,8 @@ const server = new McpServer({
     sampling: false
   },
   metadata: {
-    description: "A tool for scraping and analyzing LinkedIn profiles and companies",
-    author: "MCP Community"
+    description: "Easiest way to integrate unblocked webscraping with your LLM",
+    author: "Friday Data"
   }
 });
 

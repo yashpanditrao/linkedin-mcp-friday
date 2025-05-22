@@ -1,23 +1,33 @@
 {
-  "name": "linkedin-mcp-friday",
+  "name": "fridaydata-mcp",
   "version": "1.0.0",
   "type": "module",
-  "description": "MCP server for LinkedIn profile and company data scraping",
+  "description": "MCP server for LinkedIn profile and company data scraping using Friday Data API",
   "main": "dist/server.js",
+  "bin": {
+    "fridaydata-mcp": "./dist/server.js"
+  },
   "scripts": {
     "start": "ts-node src/server.ts",
     "build": "tsc",
     "dev": "ts-node-dev --respawn src/server.ts",
-    "test": "jest"
+    "test": "jest",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "mcp",
     "linkedin",
     "scraping",
-    "api"
+    "api",
+    "friday-data",
+    "model-context-protocol"
   ],
-  "author": "",
+  "author": "Friday Data",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fridaydata/fridaydata-mcp"
+  },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
     "@types/node": "^18.0.0",
