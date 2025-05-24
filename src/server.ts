@@ -162,6 +162,144 @@ server.tool(
   }
 );
 
+// Website information extraction tool
+server.tool(
+  "extract_website_info",
+  "Extracts structured information from a website based on a custom schema",
+  {
+    url: z.string().url(),
+    query: z.string(),
+    custom_schema: z.union([z.array(z.record(z.any())), z.record(z.any())]).optional().default({})
+  },
+  async ({ url, query, custom_schema = {} }) => {
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 60000); // 60 second timeout
+
+      const response = await fetch(
+        'https://api.fridaydata.tech/extract',
+        {
+          method: 'POST',
+          headers: {
+            'X-API-KEY': process.env.FRIDAY_API_KEY || '',
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({ url, query, custom_schema }),
+          signal: controller.signal
+        }
+      );
+
+      clearTimeout(timeout);
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error(`API Error (${response.status}):`, errorText);
+        throw new Error(`API Error (${response.status}): ${errorText}`);
+      }
+      
+      const data = await response.json();
+      if (!data) {
+        throw new Error('Invalid response format from API');
+      }
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify(data, null, 2)
+        }]
+      };
+    } catch (error: unknown) {
+      console.error('Website extraction error:', error);
+      if (error && typeof error === 'object' && 'name' in error && error.name === 'AbortError') {
+        return {
+          content: [{
+            type: "text",
+            text: JSON.stringify({ error: "Request timed out after 60 seconds" })
+          }],
+          isError: true
+        };
+      }
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({ error: error instanceof Error ? error.message : 'Unknown error' })
+        }],
+        isError: true
+      };
+    }
+  }
+);
+
+// Web search tool
+server.tool(
+  "web_search",
+  "Performs a web search with optional location and number of results parameters",
+  {
+    query: z.string(),
+    location: z.string().optional().default("US"),
+    num_results: z.number().int().min(1).max(100).optional().default(15)
+  },
+  async ({ query, location = "US", num_results = 15 }) => {
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 60000); // 60 second timeout
+
+      const response = await fetch(
+        'https://api.fridaydata.tech/search',
+        {
+          method: 'POST',
+          headers: {
+            'X-API-KEY': process.env.FRIDAY_API_KEY || '',
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({ query, location, num_results }),
+          signal: controller.signal
+        }
+      );
+
+      clearTimeout(timeout);
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error(`API Error (${response.status}):`, errorText);
+        throw new Error(`API Error (${response.status}): ${errorText}`);
+      }
+      
+      const data = await response.json();
+      if (!data) {
+        throw new Error('Invalid response format from API');
+      }
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify(data, null, 2)
+        }]
+      };
+    } catch (error: unknown) {
+      console.error('Web search error:', error);
+      if (error && typeof error === 'object' && 'name' in error && error.name === 'AbortError') {
+        return {
+          content: [{
+            type: "text",
+            text: JSON.stringify({ error: "Request timed out after 60 seconds" })
+          }],
+          isError: true
+        };
+      }
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({ error: error instanceof Error ? error.message : 'Unknown error' })
+        }],
+        isError: true
+      };
+    }
+  }
+);
+
 // Start server with error handling
 try {
   const transport = new StdioServerTransport();
