@@ -1,31 +1,51 @@
-# LinkedIn MCP Server
+# FridayData MCP Server
 
-A powerful Model Context Protocol (MCP) server for extracting structured data from LinkedIn profiles and company pages.
+A powerful Model Context Protocol (MCP) server providing access to LinkedIn scraping, web search, and website data extraction capabilities.
 
 ## Overview
 
-This MCP server provides a reliable way to scrape and analyze LinkedIn data through a simple API interface. Get started by obtaining your API key from [Friday Data](https://fridaydata.tech).
+This MCP server exposes three key endpoints through a simple API interface:
+
+1. LinkedIn Profile Scraping (`/profile`) - Extract structured data from LinkedIn profiles
+2. LinkedIn Company Analysis (`/analyze-company`) - Gather insights from company pages
+3. Website Information Extraction (`/extract`) - Extract custom data from any website
+4. Web Search (`/search`) - Perform location-aware web searches
+
+Get started by obtaining your API key from [Friday Data](https://fridaydata.tech).
 
 ## Key Features
 
-- **Profile Data Extraction**: Automatically extract structured data from LinkedIn profile URLs including:
-  - Work experience
-  - Education
-  - Skills
-  - Certifications
-  - And more
+- **LinkedIn Profile Scraping**:
+  - Full profile data in JSON format
+  - 60 second timeout per request
+  - Error handling with detailed messages
+  - Automatic response validation
 
-- **Company Intelligence**: Analyze LinkedIn company pages to gather:
-  - Company overview
-  - Employee count
-  - Industry information  
-  - Recent updates
+- **LinkedIn Company Analysis**:
+  - POST request to `/analyze-company`
+  - Company insights in structured format
+  - Configurable timeout settings
+  - Comprehensive error reporting
 
-- **Production Ready**:
+- **Website Data Extraction**:
+  - Custom schema support
+  - Flexible query parameters
+  - JSON response format
+  - Built-in timeout protection
+
+- **Web Search Capabilities**:
+  - Location-based searching (default: US)
+  - Configurable result count (1-100)
+  - Structured JSON responses
   - Robust error handling
-  - Input validation
-  - Rate limiting
-  - Automatic retries
+
+## Technical Details
+
+- All endpoints require `X-API-KEY` header
+- Responses are in JSON format
+- 60 second timeout on all requests
+- Automatic request abortion on timeout
+- Full error stack traces in development
 
 ## Quick Start
 
