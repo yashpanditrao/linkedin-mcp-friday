@@ -1,6 +1,6 @@
 {
   "name": "fridaydata-mcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "MCP server for LinkedIn profile and company data scraping using Friday Data API",
   "main": "dist/server.js",
